@@ -1,0 +1,38 @@
+import { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { getMovieDetails } from '../services/tmdb';
+
+function MovieDetail() {
+  const { id } = useParams();
+  const [movie, setMovie] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    getMovieDetails(id)
+      .then(setMovie)
+      .catch(() => setError('Failed to load movie'))
+      .finally(() => setLoading(false));
+  }, [id]);
+
+  if (loading) return <p style={{ padding: '20px' }}>Loading...</p>;
+  if (error) return <p style={{ color: 'red', padding: '20px' }}>{error}</p>;
+  if (!movie) return <p style={{ padding: '20px' }}>Movie not found</p>;
+
+  return (
+    <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+      <img
+        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+        alt={movie.title}
+        style={{ width: '300px', borderRadius: '8px' }}
+      />
+      <h1 style={{ marginTop: '20px' }}>{movie.title}</h1>
+      <p>📅 {movie.release_date}</p>
+      <p>⭐ {movie.vote_average?.toFixed(1)}</p>
+      <p>🎬 {movie.genres?.map(g => g.name).join(', ')}</p>
+      <p style={{ marginTop: '10px', lineHeight: '1.6' }}>{movie.overview}</p>
+    </div>
+  );
+}
+
+export default MovieDetail;

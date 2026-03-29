@@ -2,8 +2,8 @@ import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Search from './pages/Search';
+import MovieDetail from './pages/MovieDetail';
 
-function MovieDetail() { return <h1>Movie Detail Page</h1>; }
 function Login() { return <h1>Login Page</h1>; }
 function Register() { return <h1>Register Page</h1>; }
 function Profile() { return <h1>Profile Page</h1>; }
