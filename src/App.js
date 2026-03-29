@@ -6,6 +6,7 @@ import MovieDetail from './pages/MovieDetail';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Navbar from './components/Navbar';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function Profile() { return <h1>Profile Page</h1>; }
 function Favourites() { return <h1>Favourites Page</h1>; }
@@ -23,11 +24,21 @@ function App() {
         <Route path="/movies/:id" element={<MovieDetail />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/profile" element={<Profile />} />
-        <Route path="/favorites" element={<Favourites />} />
-        <Route path="/advanced-search" element={<AdvancedSearch />} />
-        <Route path="/watchlists" element={<Watchlists />} />
-        <Route path="/watchlists/:id" element={<WatchlistDetail />} />
+        <Route path="/profile" element={
+          <ProtectedRoute><Profile /></ProtectedRoute>
+        } />
+        <Route path="/favorites" element={
+          <ProtectedRoute><Favourites /></ProtectedRoute>
+        } />
+        <Route path="/advanced-search" element={
+          <ProtectedRoute><AdvancedSearch /></ProtectedRoute>
+        } />
+        <Route path="/watchlists" element={
+          <ProtectedRoute><Watchlists /></ProtectedRoute>
+        } />
+        <Route path="/watchlists/:id" element={
+          <ProtectedRoute><WatchlistDetail /></ProtectedRoute>
+        } />
       </Routes>
     </BrowserRouter>
   );
