@@ -7,12 +7,12 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Profile from './pages/Profile';
 import AdvancedSearch from './pages/AdvancedSearch';
+import Watchlists from './pages/Watchlists';
+import WatchlistDetail from './pages/WatchlistDetail';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
 
 function Favourites() { return <h1>Favourites Page</h1>; }
-function Watchlists() { return <h1>Watchlists Page</h1>; }
-function WatchlistDetail() { return <h1>Watchlist Detail Page</h1>; }
 
 function App() {
   return (

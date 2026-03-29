@@ -2,13 +2,19 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getMovieDetails } from '../services/tmdb';
 import { useFavourites } from '../context/FavouritesContext';
+import { useWatchlist } from '../context/WatchlistContext';
+import { useAuth } from '../context/AuthContext';
 
 function MovieDetail() {
   const { id } = useParams();
   const [movie, setMovie] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [selectedWl, setSelectedWl] = useState('');
+  const [added, setAdded] = useState(false);
   const { addFav, removeFav, isFav } = useFavourites();
+  const { watchlists, addMovie } = useWatchlist();
+  const { user } = useAuth();
 
   useEffect(() => {
     getMovieDetails(id)
@@ -33,6 +39,7 @@ function MovieDetail() {
       <p>⭐ {movie.vote_average?.toFixed(1)}</p>
       <p>🎬 {movie.genres?.map(g => g.name).join(', ')}</p>
       <p style={{ marginTop: '10px', lineHeight: '1.6' }}>{movie.overview}</p>
+
       <button
         onClick={() => isFav(movie.id) ? removeFav(movie.id) : addFav(movie)}
         style={{
@@ -48,6 +55,45 @@ function MovieDetail() {
       >
         {isFav(movie.id) ? '❤️ Remove from Favourites' : '🤍 Add to Favourites'}
       </button>
+
+      {user && watchlists.length > 0 && (
+        <div style={{ marginTop: '20px', display: 'flex', gap: '10px', flexWrap: 'wrap' }}>
+          <select
+            onChange={e => setSelectedWl(e.target.value)}
+            style={{ padding: '10px', fontSize: '16px' }}
+          >
+            <option value="">Add to watchlist...</option>
+            {watchlists.map(wl => (
+              <option key={wl.id} value={wl.id}>{wl.name}</option>
+            ))}
+          </select>
+          <button
+            onClick={() => {
+              if (selectedWl) {
+                addMovie(selectedWl, movie);
+                setAdded(true);
+                setTimeout(() => setAdded(false), 2000);
+              }
+            }}
+            style={{
+              padding: '10px 20px',
+              backgroundColor: '#032541',
+              color: 'white',
+              border: 'none',
+              borderRadius: '8px',
+              cursor: 'pointer',
+              fontSize: '16px'
+            }}
+          >
+            Add to Watchlist
+          </button>
+        </div>
+      )}
+      {added && (
+        <p style={{ color: 'green', marginTop: '8px', fontWeight: 'bold' }}>
+          ✅ Added to watchlist!
+        </p>
+      )}
     </div>
   );
 }
