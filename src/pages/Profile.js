@@ -1,11 +1,13 @@
 import { useAuth } from '../context/AuthContext';
 import { useFavourites } from '../context/FavouritesContext';
+import { useWatchlist } from '../context/WatchlistContext';
 import MovieCard from '../components/MovieCard';
 import { Link } from 'react-router-dom';
 
 function Profile() {
   const { user, logout } = useAuth();
   const { favs } = useFavourites();
+  const { watchlists } = useWatchlist();
 
   return (
     <div style={{ padding: '20px', maxWidth: '900px', margin: '0 auto' }}>
@@ -40,18 +42,33 @@ function Profile() {
         </div>
       )}
 
-      <h2 style={{ marginTop: '30px' }}>📋 My Watchlists</h2>
-      <Link to="/watchlists" style={{
-        display: 'inline-block',
-        marginTop: '10px',
-        padding: '10px 20px',
-        backgroundColor: '#032541',
-        color: 'white',
-        borderRadius: '8px',
-        textDecoration: 'none'
-      }}>
-        View My Watchlists
-      </Link>
+      <h2 style={{ marginTop: '30px' }}>📋 My Watchlists ({watchlists.length})</h2>
+      {watchlists.length === 0 ? (
+        <p>No watchlists yet! <Link to="/watchlists">Create one</Link></p>
+      ) : (
+        watchlists.map(wl => (
+          <div key={wl.id} style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            padding: '15px',
+            backgroundColor: 'white',
+            borderRadius: '8px',
+            marginBottom: '10px',
+            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+          }}>
+            <Link to={`/watchlists/${wl.id}`} style={{
+              textDecoration: 'none',
+              color: '#032541',
+              fontWeight: 'bold',
+              fontSize: '18px'
+            }}>
+              📋 {wl.name}
+            </Link>
+            <span style={{ color: 'gray' }}>{wl.movies.length} movies</span>
+          </div>
+        ))
+      )}
     </div>
   );
 }
