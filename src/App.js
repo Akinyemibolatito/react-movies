@@ -1,6 +1,7 @@
+import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './pages/Home';
 
-function Home() { return <h1>Home Page</h1>; }
 function Search() { return <h1>Search Page</h1>; }
 function MovieDetail() { return <h1>Movie Detail Page</h1>; }
 function Login() { return <h1>Login Page</h1>; }
