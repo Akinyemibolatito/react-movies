@@ -1,8 +1,8 @@
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
+import Search from './pages/Search';
 
-function Search() { return <h1>Search Page</h1>; }
 function MovieDetail() { return <h1>Movie Detail Page</h1>; }
 function Login() { return <h1>Login Page</h1>; }
 function Register() { return <h1>Register Page</h1>; }
