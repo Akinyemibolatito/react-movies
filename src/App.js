@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import MovieDetail from './pages/MovieDetail';
+import Navbar from './components/Navbar';
 
 function Login() { return <h1>Login Page</h1>; }
 function Register() { return <h1>Register Page</h1>; }
@@ -15,6 +16,7 @@ function WatchlistDetail() { return <h1>Watchlist Detail Page</h1>; }
 function App() {
   return (
     <BrowserRouter>
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/search" element={<Search />} />
