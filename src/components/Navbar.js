@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useFavourites } from '../context/FavouritesContext';
+import { useAuth } from '../context/AuthContext';
 
 function Navbar() {
   const { favs } = useFavourites();
+  const { user, logout } = useAuth();
 
   return (
     <nav style={{
@@ -21,12 +23,35 @@ function Navbar() {
       <Link to="/favorites" style={{ color: 'white', textDecoration: 'none' }}>
         ❤️ Favourites ({favs.length})
       </Link>
-      <Link to="/login" style={{ color: 'white', textDecoration: 'none', marginLeft: 'auto' }}>
-        Login
-      </Link>
-      <Link to="/register" style={{ color: 'white', textDecoration: 'none' }}>
-        Register
-      </Link>
+      {user ? (
+        <>
+          <Link to="/profile" style={{ color: 'white', textDecoration: 'none', marginLeft: 'auto' }}>
+            👤 {user.name}
+          </Link>
+          <Link to="/watchlists" style={{ color: 'white', textDecoration: 'none' }}>
+            📋 Watchlists
+          </Link>
+          <button onClick={logout} style={{
+            backgroundColor: 'transparent',
+            color: 'white',
+            border: '1px solid white',
+            padding: '5px 10px',
+            cursor: 'pointer',
+            borderRadius: '4px'
+          }}>
+            Logout
+          </button>
+        </>
+      ) : (
+        <>
+          <Link to="/login" style={{ color: 'white', textDecoration: 'none', marginLeft: 'auto' }}>
+            Login
+          </Link>
+          <Link to="/register" style={{ color: 'white', textDecoration: 'none' }}>
+            Register
+          </Link>
+        </>
+      )}
     </nav>
   );
 }

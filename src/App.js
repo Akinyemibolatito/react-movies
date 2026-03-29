@@ -3,10 +3,10 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Search from './pages/Search';
 import MovieDetail from './pages/MovieDetail';
+import Login from './pages/Login';
+import Register from './pages/Register';
 import Navbar from './components/Navbar';
 
-function Login() { return <h1>Login Page</h1>; }
-function Register() { return <h1>Register Page</h1>; }
 function Profile() { return <h1>Profile Page</h1>; }
 function Favourites() { return <h1>Favourites Page</h1>; }
 function AdvancedSearch() { return <h1>Advanced Search Page</h1>; }

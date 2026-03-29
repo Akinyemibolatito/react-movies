@@ -1,5 +1,13 @@
 {
-  "users": [],
+  "users": [
+    {
+      "name": "BOLA",
+      "email": "akinyemibolatito130@gmail.com",
+      "password": "Canada123.",
+      "id": "7_RELi11rR4"
+    }
+  ],
   "favorites": [],
-  "watchlists": []
+  "watchlists": [],
+  "$schema": "./node_modules/json-server/schema.json"
 }
