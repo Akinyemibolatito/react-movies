@@ -1,24 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+function Home() { return <h1>Home Page</h1>; }
+function Search() { return <h1>Search Page</h1>; }
+function MovieDetail() { return <h1>Movie Detail Page</h1>; }
+function Login() { return <h1>Login Page</h1>; }
+function Register() { return <h1>Register Page</h1>; }
+function Profile() { return <h1>Profile Page</h1>; }
+function Favourites() { return <h1>Favourites Page</h1>; }
+function AdvancedSearch() { return <h1>Advanced Search Page</h1>; }
+function Watchlists() { return <h1>Watchlists Page</h1>; }
+function WatchlistDetail() { return <h1>Watchlist Detail Page</h1>; }
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/movies/:id" element={<MovieDetail />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/profile" element={<Profile />} />
+        <Route path="/favorites" element={<Favourites />} />
+        <Route path="/advanced-search" element={<AdvancedSearch />} />
+        <Route path="/watchlists" element={<Watchlists />} />
+        <Route path="/watchlists/:id" element={<WatchlistDetail />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
