@@ -23,7 +23,7 @@ function MovieDetail() {
       .finally(() => setLoading(false));
   }, [id]);
 
-  if (loading) return <p style={{ padding: '20px' }}>Loading...</p>;
+  if (loading) return <div className="spinner"></div>;
   if (error) return <p style={{ color: 'red', padding: '20px' }}>{error}</p>;
   if (!movie) return <p style={{ padding: '20px' }}>Movie not found</p>;
 

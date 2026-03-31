@@ -24,8 +24,8 @@ function Search() {
 
   return (
     <div>
-      <h1>Search Movies</h1>
-      <form onSubmit={handleSearch} style={{ padding: '20px' }}>
+      <h1 style={{ padding: '20px' }}>Search Movies</h1>
+      <form onSubmit={handleSearch} style={{ padding: '0 20px 20px' }}>
         <input
           value={query}
           onChange={e => setQuery(e.target.value)}
@@ -36,7 +36,7 @@ function Search() {
           Search
         </button>
       </form>
-      {loading && <p style={{ padding: '20px' }}>Loading...</p>}
+      {loading && <div className="spinner"></div>}
       {error && <p style={{ color: 'red', padding: '20px' }}>{error}</p>}
       <div className="movie-grid">
         {results.map(m => <MovieCard key={m.id} movie={m} />)}

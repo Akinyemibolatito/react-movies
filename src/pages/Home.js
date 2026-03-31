@@ -14,12 +14,12 @@ function Home() {
       .finally(() => setLoading(false));
   }, []);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p style={{ color: 'red' }}>{error}</p>;
+  if (loading) return <div className="spinner"></div>;
+  if (error) return <p style={{ color: 'red', padding: '20px' }}>{error}</p>;
 
   return (
     <div>
-      <h1>Trending Today</h1>
+      <h1 style={{ padding: '20px' }}>Trending Today</h1>
       <div className="movie-grid">
         {movies.map(m => <MovieCard key={m.id} movie={m} />)}
       </div>
