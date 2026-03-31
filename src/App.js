@@ -9,10 +9,9 @@ import Profile from './pages/Profile';
 import AdvancedSearch from './pages/AdvancedSearch';
 import Watchlists from './pages/Watchlists';
 import WatchlistDetail from './pages/WatchlistDetail';
+import Favourites from './pages/Favourites';
 import Navbar from './components/Navbar';
 import ProtectedRoute from './components/ProtectedRoute';
-
-function Favourites() { return <h1>Favourites Page</h1>; }
 
 function App() {
   return (
