@@ -29,6 +29,21 @@ function MovieDetail() {
 
   return (
     <div style={{ padding: '20px', maxWidth: '800px', margin: '0 auto' }}>
+      <button
+        onClick={() => window.history.back()}
+        style={{
+          marginBottom: '20px',
+          padding: '8px 16px',
+          backgroundColor: '#032541',
+          color: 'white',
+          border: 'none',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          fontSize: '16px'
+        }}
+      >
+        ← Back
+      </button>
       <img
         src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         alt={movie.title}
@@ -93,6 +108,21 @@ function MovieDetail() {
         <p style={{ color: 'green', marginTop: '8px', fontWeight: 'bold' }}>
           ✅ Added to watchlist!
         </p>
+      )}
+
+      {!user && (
+        <div style={{
+          marginTop: '20px',
+          padding: '15px',
+          backgroundColor: '#e8f4fd',
+          borderRadius: '8px',
+          border: '1px solid #032541'
+        }}>
+          <p style={{ margin: 0 }}>
+            🔒 <strong>Create an account</strong> to save favourites to the database and manage watchlists!
+            <a href="/register" style={{ color: '#032541', marginLeft: '8px' }}>Register now</a>
+          </p>
+        </div>
       )}
     </div>
   );
