@@ -1,96 +1,119 @@
 ---
 name: react-movies
-description: A full-featured movie discovery and watchlist management web application. Use this skill when building React applications with TMDB API integration, user authentication, JSON Server backend, Context API state management, and React Router navigation.
+description: Builds a full-featured movie discovery and watchlist web application using React, TMDB API, JSON Server, Context API, and React Router. Use this skill when building React applications that need user authentication, API integration, local backend with JSON Server, global state management with Context API, and client-side routing with React Router.
 ---
 
 # React Movies - Movie Finder & Watchlist Application
 
 ## Overview
-A React application that integrates with TMDB API to retrieve live movie data and uses JSON Server as a local backend to persist user accounts, favourites, and watchlists.
+A full-featured movie discovery and watchlist management web application. Integrates with TMDB API for live movie data and uses JSON Server as a local backend to persist user accounts, favourites, and watchlists.
 
-## Setup Instructions
-
-### Prerequisites
+## Prerequisites
 - Node.js installed
 - npm installed
-- TMDB API key (free at themoviedb.org)
+- Free TMDB API key from themoviedb.org
 
-### Installation
-1. Clone the repository:
+## Step 1: Clone and Install
 git clone https://github.com/Akinyemibolatito/react-movies.git
 cd react-movies
-
-2. Install dependencies:
 npm install
 
-3. Create .env file in root folder:
+## Step 2: Configure Environment
+Create a .env file in the root folder:
 REACT_APP_TMDB_KEY=your_tmdb_api_key_here
 
-4. Start JSON Server (Terminal 1):
+Get your free API key from themoviedb.org → Settings → API
+
+## Step 3: Start JSON Server (Terminal 1)
 npm run server
 
-5. Start React app (Terminal 2):
+JSON Server runs on http://localhost:3001
+Endpoints available:
+- http://localhost:3001/users
+- http://localhost:3001/favorites
+- http://localhost:3001/watchlists
+
+## Step 4: Start React App (Terminal 2)
 npm start
 
-## Features Implemented
+App runs on http://localhost:3000 (or 3002 if ports are taken)
+
+## Project Structure
+react-movies/
+├── src/
+│   ├── components/
+│   │   ├── MovieCard.js      ← Reusable movie card
+│   │   ├── Navbar.js         ← Navigation bar
+│   │   └── ProtectedRoute.js ← Auth guard
+│   ├── pages/
+│   │   ├── Home.js           ← Trending movies
+│   │   ├── Search.js         ← Search movies
+│   │   ├── MovieDetail.js    ← Full movie info
+│   │   ├── Login.js          ← User login
+│   │   ├── Register.js       ← User registration
+│   │   ├── Profile.js        ← User profile
+│   │   ├── Favourites.js     ← Saved favourites
+│   │   ├── AdvancedSearch.js ← Filter search
+│   │   ├── Watchlists.js     ← Manage watchlists
+│   │   └── WatchlistDetail.js← Single watchlist
+│   ├── context/
+│   │   ├── AuthContext.js        ← Login state
+│   │   ├── FavouritesContext.js  ← Favourites state
+│   │   └── WatchlistContext.js   ← Watchlist state
+│   └── services/
+│       └── tmdb.js           ← All TMDB API calls
+├── db.json                   ← JSON Server database
+├── .env                      ← API key (not committed)
+└── package.json              ← Scripts and dependencies
+
+## Features
 
 ### Grade B - Guest Features
-- Trending movies homepage using TMDB /trending/movie/day endpoint
-- Movie search using TMDB /search/movie endpoint
+- Trending movies homepage (TMDB /trending/movie/day)
+- Movie search by keyword (TMDB /search/movie)
 - Movie detail page with poster, title, rating, genres, overview
-- Local favourites using localStorage and Context API
-- Responsive CSS Grid layout
+- Add/remove favourites stored in localStorage
+- Responsive CSS Grid layout for mobile and desktop
 
 ### Grade B+ - Authentication & Advanced Search
-- User registration with client-side validation
+- User registration with name, email, password validation
 - User login/logout with session persistence via localStorage
-- AuthContext for global authentication state
-- Protected routes redirecting unauthenticated users to /login
+- AuthContext for global authentication state management
+- Protected routes that redirect unauthenticated users to /login
 - Profile page showing user info, favourites and watchlists
 - Advanced search using TMDB /discover/movie endpoint
 - Filters: genre, release year, minimum rating, language
 
 ### Grade A - Watchlist Manager
-- Create named watchlists stored in JSON Server
+- Create named watchlists stored in JSON Server database
 - Add movies to watchlists from Movie Detail page
-- Remove individual movies from watchlists
-- Delete entire watchlists
+- Remove individual movies from watchlist detail page
+- Delete entire watchlists permanently
 - Watchlist detail page at /watchlists/:id
-- Watchlists displayed on Profile page
+- All watchlists shown on Profile page
+
+## Routes
+Route | Access | Description
+/ | All users | Trending movies
+/search | All users | Search by keyword
+/movies/:id | All users | Movie details
+/login | Guest only | Login form
+/register | Guest only | Register form
+/profile | Auth only | User profile
+/favorites | Auth only | Saved favourites
+/advanced-search | Auth only | Filter search
+/watchlists | Auth only | All watchlists
+/watchlists/:id | Auth only | Single watchlist
 
 ## Technology Stack
-- React 19 (Functional Components only)
-- React Hooks (useState, useEffect, useContext)
-- Context API (AuthContext, FavouritesContext, WatchlistContext)
-- React Router v7
-- TMDB API (REST)
-- JSON Server (local backend on port 3001)
-- CSS Grid (responsive design)
-
-## Project Structure
-src/
-  components/
-    MovieCard.js
-    Navbar.js
-    ProtectedRoute.js
-  pages/
-    Home.js
-    Search.js
-    MovieDetail.js
-    Login.js
-    Register.js
-    Profile.js
-    Favourites.js
-    AdvancedSearch.js
-    Watchlists.js
-    WatchlistDetail.js
-  context/
-    AuthContext.js
-    FavouritesContext.js
-    WatchlistContext.js
-  services/
-    tmdb.js
+- React 19 with Functional Components
+- React Hooks: useState, useEffect, useContext
+- Context API: AuthContext, FavouritesContext, WatchlistContext
+- React Router v7 for client-side routing
+- TMDB REST API for movie data
+- JSON Server on port 3001 as local backend
+- CSS Grid for responsive layout
 
 ## Known Issues
 - Passwords stored in plain text in JSON Server (development only)
-- App runs on port 3002 if 3000 and 3001 are already in use
+- App may run on port 3002 if 3000 is already in use
